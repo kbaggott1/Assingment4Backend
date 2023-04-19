@@ -13,7 +13,7 @@ const logger = require("../logger");
  */
 async function checkValidForEdit(collection, id, message) {
     try {
-        if(!validator.isNumeric(id))
+        if(!validator.isNumeric(id.toString()))
             throw new InvalidInputError("Invalid id: " + id + ". Ids must be numeric.");
 
         if((await isMessageIdUnique(collection, id)))
