@@ -89,6 +89,10 @@ async function checkId(collection, id) {
 function checkMessage(message) {
     const MAX_CHAR = 500;
 
+    if(!message) {
+        throw new InvalidInputError("Message cannot be empty");
+    }
+
     if(message.length == 0) {
         throw new InvalidInputError("Message cannot be empty");
     }
@@ -104,6 +108,10 @@ function checkMessage(message) {
  * @throws InvalidInputError
  */
 function checkUser(user) {
+    if(!user) {
+        throw new InvalidInputError("user cannot be empty");
+    }
+
     if(!validator.isAlphanumeric(user))
         throw new InvalidInputError("Illegal characters in username: " + user);
 }

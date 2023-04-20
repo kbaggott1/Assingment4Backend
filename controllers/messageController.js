@@ -28,25 +28,25 @@ async function createMessage(req, res) {
         }
         else {
             res.status("400");
-            res.send("Could not add message to database.");
+            res.send({errorMessage: "Could not add message to database."});
             logger.error("Could not add message in controller.");
         }
     }
     catch(err) {
         if(err instanceof DatabaseError) {
             res.status("500");
-            res.send("Database Error trying to add message");
+            res.send({errorMessage: "Database Error trying to add message: "+err.message});
             logger.error("Database Error trying to add message in controller: "+err.message);
         }
         else 
         if(err instanceof InvalidInputError) {
             res.status("400");
-            res.send("Invalid input, cant add message");
+            res.send({errorMessage: "Invalid input, cant add message: "+err.message});
             logger.error("Invalid input trying to add message: "+err.message);
         }
         else {
             res.status("500");
-            res.send("Error trying to add message");
+            res.send({errorMessage: "Error trying to add message: "+err.message});
             logger.error("Error try to add in controller: "+err.message);
         }
     }
@@ -70,12 +70,12 @@ async function getMessages(req, res) {
     catch(err) {
         if(err instanceof DatabaseError) {
             res.status("500");
-            res.send("Database Error trying to get messages");
+            res.send({errorMessage: "Database Error trying to get messages: "+err.message});
             logger.error("Database Error trying to get all messages in controller: "+err.message);
         }
         else {
             res.status("500");
-            res.send("Error trying to get messages");
+            res.send({errorMessage: "Error trying to get messages: "+err.message});
             logger.error("Error trying to get all messages in controller: "+err.message);
         }
     }
@@ -98,25 +98,25 @@ async function getMessage(req, res) {
             res.send("message Found: \""+message.message+"\" sent by: "+message.user);
         } else {
             res.status("400");
-            res.send("Unable to find message");
+            res.send({errorMessage: "Unable to find message"});
             logger.error("Unable to find message in controller");
         }
     }
     catch(err) {
         if(err instanceof DatabaseError) {
             res.status("500");
-            res.send("Database Error trying to get message");
+            res.send({errorMessage: "Database Error trying to get message: "+err.message});
             logger.error("Database Error trying to get in controller: "+err.message);
         }
         else
         if(err instanceof InvalidInputError) {
             res.status("400");
-            res.send("Can't find message");
+            res.send({errorMessage: "Can't find message: "+err.message});
             logger.error("Invalid input trying to get message: "+err.message);
         }
         else {
             res.status("500");
-            res.send("Error trying to get message");
+            res.send({errorMessage: "Error trying to get message: "+err.message});
             logger.error("Error trying to get message in controller: "+err.message);
         }
     }
@@ -139,25 +139,25 @@ async function updateMessage(req, res) {
         }
         else {
             res.status("400");
-            res.send("Could not edit message to database.");
+            res.send({errorMessage: "Could not edit message to database."});
             logger.error("Could not edit message in controller.");
         }
     }
     catch(err) {
         if(err instanceof DatabaseError) {
             res.status("500");
-            res.send("Database Error trying to edit message");
+            res.send({errorMessage: "Database Error trying to edit message: "+err.message});
             logger.error("Database Error trying to edit message in controller: "+err.message);
         }
         else 
         if(err instanceof InvalidInputError) {
             res.status("400");
-            res.send("Invalid input, cant edit message");
+            res.send({errorMessage: "Invalid input, cant edit message: "+err.message});
             logger.error("Invalid input trying to edit message: "+err.message);
         }
         else {
             res.status("500");
-            res.send("Error trying to edit message");
+            res.send({errorMessage: "Error trying to edit message: "+err.message});
             logger.error("Error trying to edit in controller: "+err.message);
         }
     }
@@ -179,12 +179,12 @@ async function deleteMessage(req, res) {
     catch(err) {
         if(err instanceof DatabaseError) {
             res.status("500");
-            res.send("Database Error trying to delete message");
+            res.send({errorMessage: "Database Error trying to delete message: "+err.message});
             logger.error("Database Error trying to delete in controller: "+err.message);
         }
         else {
             res.status("500");
-            res.send("Error trying to delete message");
+            res.send({errorMessage: "Error trying to delete message: "+err.message});
             logger.error("Error trying to delete message in controller: "+err.message);
         }
     }
